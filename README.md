@@ -12,5 +12,5 @@ number of words you want your password to consist of. E.g. `./password_generator
 /path/to/file 5` creates a password consisting of 5 words.
 
 # TODO
-* Since most services requires numbers/symbols in the password, it would
+* Since most services require numbers/symbols in the password, it would
 make some sense to add these somewhere too...
