@@ -43,7 +43,7 @@ func main() {
 	}
 
 	for i := 0; i < wordCount; i++ {
-		n := rand.Intn(522924)
+		n := rand.Intn(len(words))
 		password.WriteString(words[n])
 	}
 	fmt.Println(password.String())
