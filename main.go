@@ -25,8 +25,23 @@ func readLines(fileToRead string) ([]string, error) {
 	return lines, scanner.Err()
 }
 
+func symbolsArray(symbolsToUse string) []string {
+	switch {
+	case symbolsToUse == "minimal":
+		return []string{"!", "@", "$", "%", "^", "&", "*", "0", "1", "2", "3", "4",
+			"5", "6", "7", "8", "9"}
+
+	case symbolsToUse == "all":
+		return []string{"!", "@", "$", "%", "^", "&", "*", "0", "1", "2", "3", "4",
+			"5", "6", "7", "8", "9", "`", "~", "#", "-", "=", "+", "[", "{", "]", "}"}
+	}
+	return nil
+}
+
 func main() {
 	var password bytes.Buffer
+	var symbols []string
+
 	rand.Seed(time.Now().UTC().UnixNano())
 
 	args := os.Args[1:]
@@ -42,9 +57,16 @@ func main() {
 		fmt.Println("Something went wrong in wordCount")
 	}
 
+	if len(args) > 2 {
+		symbols = symbolsArray(args[2])
+	} else {
+		symbols = symbolsArray("minimal")
+	}
+
 	for i := 0; i < wordCount; i++ {
 		n := rand.Intn(len(words))
-		password.WriteString(words[n])
+		n0 := rand.Intn(len(symbols))
+		password.WriteString(words[n] + symbols[n0])
 	}
 	fmt.Println(password.String())
 }

@@ -9,8 +9,7 @@ password of arbitrary words.
 # How-to
 Call the binary with the complete path to your dictionary file, and the
 number of words you want your password to consist of. E.g. `./password_generator
-/path/to/file 5` creates a password consisting of 5 words.
+/path/to/file 5 minimal` creates a password consisting of 5 words, and using the
+array with restricted symbols
 
 # TODO
-* Since most services require numbers/symbols in the password, it would
-make some sense to add these somewhere too...
