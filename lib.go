@@ -1,8 +1,7 @@
-package password_generator
+package passphrase
 
 import (
 	"bufio"
-	"bytes"
 	"crypto/rand"
 	"math/big"
 	"os"
@@ -42,14 +41,17 @@ func New(symbolsToUse Symbols, filePath string) *PasswordGenerator {
 	return &PasswordGenerator{words, symbols}
 }
 
-func (pg *PasswordGenerator) GeneratePassphrase(wordCount int) string {
-	var password bytes.Buffer
+func (pg *PasswordGenerator) Generate(wordCount int) []string {
+	var password []string
 	var nWords *big.Int
 	var nSymbols *big.Int
 
 	nWords = big.NewInt(int64(len(pg.Words)))
 	if pg.Symbols != nil {
 		nSymbols = big.NewInt(int64(len(pg.Symbols)))
+		password = make([]string, wordCount*2-1)
+	} else {
+		password = make([]string, wordCount)
 	}
 
 	for i := 0; i < wordCount; i++ {
@@ -67,10 +69,10 @@ func (pg *PasswordGenerator) GeneratePassphrase(wordCount int) string {
 			word += pg.Symbols[n0.Int64()]
 		}
 
-		password.WriteString(word)
+		password[i] = word
 	}
 
-	return password.String()
+	return password
 }
 
 func readLines(fileToRead string) ([]string, error) {

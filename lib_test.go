@@ -1,4 +1,4 @@
-package password_generator
+package passphrase
 
 import (
 	"testing"
@@ -10,6 +10,6 @@ func BenchmarkGeneratePassphrase(b *testing.B) {
 
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
-		pg.GeneratePassphrase(4)
+		pg.Generate(4)
 	}
 }
